@@ -21,7 +21,7 @@ public class GameGUI {
 //        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("m5x7.ttf"));
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("victor-pixel.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 35;
+        parameter.size = 25;
 
         font = generator.generateFont(parameter);
         generator.dispose();
@@ -31,12 +31,27 @@ public class GameGUI {
         Player player = screen.getPlayer();
         PlaneEquipment eq = player.getEquipment();
 
-        font.draw(batch, String.format("PLT: %s",screen.getPlayer().getUsername()),20,HEIGHT-20);
-        font.draw(batch, String.format("THR: %d",player.getThrottle()),20,HEIGHT-60);
-        font.draw(batch, String.format("SPD: %.2f",player.getSpeed()),20,HEIGHT-60);
-        font.draw(batch, String.format("ALT: %.1f",player.getLocation().getY()),20,HEIGHT-100);
-        font.draw(batch, String.format("GUN: %d",eq.getAmmo()),50,200);
-        font.draw(batch, String.format("MSLE: %d",eq.getMissiles()),50,250);
-        font.draw(batch, String.format("COUN: %d",eq.getCountermeasures()),50,300);
+        int col = 0;
+        font.draw(batch, String.format("PLT: %s",screen.getPlayer().getUsername()),getLabelX(0),getLabelY(col++));
+        font.draw(batch, String.format("THR: %d",player.getThrottle()),getLabelX(0),getLabelY(col++));
+        font.draw(batch, String.format("SPD: %.0f",player.getSpeed()),getLabelX(0),getLabelY(col++));
+        font.draw(batch, String.format("ALT: %.0f",player.getLocation().getY()),getLabelX(0),getLabelY(col++));
+
+        col+=2;
+        font.draw(batch, String.format("GUN: %d",eq.getAmmo()),getLabelX(0),getLabelY(col++));
+        font.draw(batch, String.format("MSLE: %d",eq.getMissiles()),getLabelX(0),getLabelY(col++));
+        font.draw(batch, String.format("COUN: %d",eq.getCountermeasures()),getLabelX(0),getLabelY(col++));
+
+        col+=2;
+        font.draw(batch, String.format("X: %.0f",player.getLocation().getX()),getLabelX(0),getLabelY(col++));
+        font.draw(batch, String.format("Y: %.0f",player.getLocation().getY()),getLabelX(0),getLabelY(col++));
+    }
+
+    private int getLabelY(int column) {
+        return HEIGHT - 20 - column * 25;
+    }
+
+    private int getLabelX(int row) {
+        return 20 + row * 200;
     }
 }
