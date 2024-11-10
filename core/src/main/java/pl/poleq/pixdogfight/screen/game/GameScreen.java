@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
         PlaneEquipment playerEquipment = new PlaneEquipment(1000,8,10);
 
         this.player = new Player(main.getGameAssets().getJetAtlas().findRegion("jet1"),
-            new Vector2(50,50),100,100, 80, 40, playerEquipment,
+            new Vector2(50,50),100,100, 200, 200, playerEquipment,
             "PoLeq");
 
         this.enemies = new ArrayList<>();
@@ -59,13 +59,6 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
-
-//        jetSprite.setBounds(0,0,54,18);
-
-
-//        set player position
-//        player.getSprite().setX((float) Gdx.graphics.getWidth()/2);
-//        player.getSprite().setY((float) Gdx.graphics.getHeight()/2);
 
         Gdx.input.setInputProcessor(new GameInputHandler(this));
         Gdx.gl.glClearColor(0,0,0,1);
@@ -99,12 +92,25 @@ public class GameScreen implements Screen {
 
     public void frameUpdate(float delta) {
         Location loc = player.getLocation();
-        loc.setX(loc.getX() + player.getSpeed()*delta);
-        loc.setY(loc.getY() + player.getSpeed()/2*delta);
-        loc.setRotation(loc.getRotation()+delta*50);
+//        loc.setX(loc.getX() + player.getSpeed()*delta);
+//        loc.setY(loc.getY() + player.getSpeed()/2*delta);
+//        loc.setRotation(loc.getRotation()+delta*50);
 
-//        player.getSprite().setX();
+        float radian = (float) Math.toRadians(loc.getRotation());
+        float sin = (float) (Math.sin(radian));
+        float cos = (float) (Math.cos(radian));
 
+        System.out.println("rotation:"+loc.getRotation());
+        System.out.println("sin:"+sin);
+        System.out.println("cos:"+cos);
+        System.out.println();
+
+        float Vx = cos * player.getSpeed();
+        float Vy = sin * player.getSpeed();
+
+        loc.addVector(Vx * delta, Vy * delta);
+//        loc.setX( );
+//        loc.setY();
 
         gameCamera.position.x = player.getLocation().getX();
         gameCamera.position.y = player.getLocation().getY();
