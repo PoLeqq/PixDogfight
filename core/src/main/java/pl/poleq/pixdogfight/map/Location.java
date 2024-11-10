@@ -27,6 +27,10 @@ public abstract class Location {
         setPosition(x,position.y);
     }
 
+    public void addVector(float x, float y) {
+        setPosition(position.x + x, position.y + y);
+    }
+
     public void setY(float y) {
         setPosition(position.x,y);
     }
@@ -38,6 +42,10 @@ public abstract class Location {
     public void setRotation(float rotation) {
         this.rotation = rotation;
         this.onLocationUpdate(getLocation().x, getLocation().y, rotation);
+    }
+
+    public void rotate(float degrees) {
+        this.rotation += degrees;
     }
 
     public void setPosition(float x, float y) {
