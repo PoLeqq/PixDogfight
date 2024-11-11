@@ -45,7 +45,7 @@ public abstract class Location {
     }
 
     public void rotate(float degrees) {
-        this.rotation += degrees;
+        setRotation(this.rotation + degrees);
     }
 
     public void setPosition(float x, float y) {
