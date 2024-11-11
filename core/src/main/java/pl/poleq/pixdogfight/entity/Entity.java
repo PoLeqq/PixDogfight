@@ -1,6 +1,7 @@
 package pl.poleq.pixdogfight.entity;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Entity {
             public void onLocationUpdate(float x, float y, float rotation) {
                 sprite.setPosition(x,y);
                 sprite.setRotation(rotation);
+//                System.out.println("sprite rotation: " + sprite.getRotation());
             }
         };
 //        this.sprite.setX(location.x);
@@ -34,5 +36,9 @@ public class Entity {
 
     public Entity(TextureAtlas.AtlasRegion texture, Vector2 location) {
         this(texture, location, new Size(texture.getRegionWidth(), texture.getRegionHeight()), 0);
+    }
+
+    public void render(SpriteBatch batch) {
+        getSprite().draw(batch);
     }
 }
