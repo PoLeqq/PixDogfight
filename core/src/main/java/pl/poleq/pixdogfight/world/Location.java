@@ -1,4 +1,4 @@
-package pl.poleq.pixdogfight.map;
+package pl.poleq.pixdogfight.world;
 
 import com.badlogic.gdx.math.Vector2;
 import lombok.AllArgsConstructor;
