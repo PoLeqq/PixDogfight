@@ -10,9 +10,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public abstract class Location {
     /**
-     * Current position
+     * Current position (x,y)
      */
-    private Vector2 position;
+    private final Vector2 position;
     /**
      * Clockwise rotation in degrees
      */
@@ -41,7 +41,7 @@ public abstract class Location {
 
     public void setRotation(float rotation) {
         this.rotation = rotation;
-        this.onLocationUpdate(getLocation().x, getLocation().y, rotation);
+        this.onLocationUpdate(getX(), getY(), rotation);
     }
 
     public void rotate(float degrees) {
@@ -57,14 +57,6 @@ public abstract class Location {
     public void setLocation(float x, float y, float rotation) {
         this.rotation = rotation;
         this.setPosition(x,y);
-    }
-
-    /**
-     * Returns copy of location
-     * @return copy of location
-     */
-    public Vector2 getLocation() {
-        return new Vector2(position.x, position.y);
     }
 
     /**
